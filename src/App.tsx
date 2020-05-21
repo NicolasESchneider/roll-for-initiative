@@ -9,7 +9,7 @@ import { CharacterInputElement } from './components/characterInputElement';
 function App(): React.ReactElement {
   const [combatBegun, toggleCombat] = React.useState(false);
   const [initiative, dispatch] = useInitiative([] as Character[]);
-
+  console.log(initiative);
   return (
     <div className="App">
       <header className="App-header">
@@ -17,16 +17,18 @@ function App(): React.ReactElement {
         <h2>Free Initiative Tracker</h2>
         <img src={logo} className="App-logo" alt="logo" />
         <CharacterInputElement addToInitiative={ dispatch } />
-        {
-          initiative.map(char => {
-            return (
-              <div className='char-display-tile'>
-                <h1>{ char.name }</h1>
-                <h2>{ char.initiative }</h2>
-              </div>
-            )
-          })  
-        }
+        <span className='initiative-order-tile'>
+          { 
+            initiative.map(char => {
+              return (
+                <div className='char-display-tile' key={ char.id }>
+                  <h2>{ char.name }</h2>
+                  <h3>{ char.initiative }</h3>
+                </div>
+              )
+            })  
+          }
+        </span>
         {
           combatBegun ?
           <h1>Roll to Hit!</h1> :

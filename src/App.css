@@ -27,6 +27,21 @@
 .App-link {
   color: #61dafb;
 }
+.character-input-form {
+  display: flex;
+  flex-direction: column;
+}
+.error-message {
+  font-size: calc(10px + 2vmin);
+  color: #F19335;
+}
+.initiative-order-tile {
+  display: flex;
+  justify-content: space-evenly;
+}
+.char-display-tile {
+  margin: 5px;
+}
 
 @keyframes App-logo-spin {
   from {

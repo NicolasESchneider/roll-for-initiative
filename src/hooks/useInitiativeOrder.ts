@@ -3,21 +3,28 @@ import { Character } from '../types/character';
 
 export const ADD_CHARACTER = 'ADD_CHARACTER';
 
-
+enum initActionType {
+  ADD_CHARACTER = 'ADD_CHARACTER',
+}
 // This is how a Reducer is Typed.
 // this is what React.useReducer takes as its first argument
-type Reducer<S, A> = (prevState: S, action: A) => S;
+// type Reducer<S, A> = (prevState: S, action: A) => S;
 
-function useInitiativeReducer(state: Character[], action: any): Character[] {
+type initiativeAction = {
+  type: initActionType;
+  character: Character;
+}
+
+function useInitiativeReducer(state: Character[], action: initiativeAction): Character[] {
   switch (action.type) {
     case ADD_CHARACTER:
       // [20, 15, 13]
       // incoming 14, we need to make state look like [20, 15, 14, 13],
       // without sorting the array every time
-      let leftState = [] as Character[];
+      let leftState = [...state] as Character[];
       let rightState = [] as Character[];
       for (let i = 0; i < state.length; i++) {
-        if (state[i].initiative <= action.initiative) {
+        if (state[i].initiative <= action.character.initiative) {
           leftState = state.slice(0, i);
           rightState = state.slice(i);
           break;
